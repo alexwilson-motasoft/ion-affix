@@ -27,9 +27,9 @@ export class IonAffix implements AfterViewInit, OnDestroy {
     clone;
     scrollSubscription;
     // header that should be made sticky
-    headerElement;
+    headerElement: HTMLElement;
     // direct parent of header (can be ion-list, ion-card etc.)
-    containerElement;
+    containerElement: HTMLElement;
     // the element that scrolls (i.e., ion-content or ion-scroll)
     scrollContainer: IonAffixContainer;
 

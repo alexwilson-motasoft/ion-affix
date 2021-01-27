@@ -1,7 +1,7 @@
 {
-    "name": "ion-affix",
-    "version": "1.1.0",
-    "description": "A directive for Ionic framework for creating affix ion-list-headers.",
+    "name": "ion-less-affix",
+    "version": "1.2.0",
+    "description": "A directive for HTML elements allowing for sticky like beheaviour",
     "main": "./dist/index.js",
     "typings": "./dist/index.d.ts",
     "scripts": {
@@ -11,21 +11,18 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/jonaszuberbuehler/ion-affix.git"
+        "url": "git+https://github.com/alexwilson-motasoft/ion-affix.git"
     },
     "keywords": [
-        "ionic",
-        "ionic2",
-        "ionic3",
         "affix",
         "fixed header"
     ],
-    "author": "Jonas Zuberbuehler <jonas.zuberbuehler@gmail.com>",
+    "author": "Alex Wilson <alex.dave999@gmail.com>",
     "license": "MIT",
     "bugs": {
-        "url": "https://github.com/jonaszuberbuehler/ion-affix/issues"
+        "url": "https://github.com/alexwilson-motasoft/ion-affix/issues"
     },
-    "homepage": "https://github.com/jonaszuberbuehler/ion-affix#readme",
+    "homepage": "https://github.com/alexwilson-motasoft/ion-affix/#readme",
     "devDependencies": {
         "@angular/common": "5.0.1",
         "@angular/compiler": "5.0.1",

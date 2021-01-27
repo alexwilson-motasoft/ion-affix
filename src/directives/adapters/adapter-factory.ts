@@ -1,5 +1,4 @@
 import { ContentAdapter } from './content-adapter';
-import { ScrollAdapter } from './scroll-adapter';
 
 export function adapterFactory (container) {
     if (container instanceof HTMLElement) {
