@@ -1,7 +1,5 @@
 import { IonAffixContainer } from '../ion-affix-container';
-import { Content } from 'ionic-angular';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/merge';
+import { Observable, merge } from 'rxjs';
 
 /**
  * Adapter for ion-content.
@@ -10,26 +8,31 @@ import 'rxjs/add/observable/merge';
  */
 export class ContentAdapter implements IonAffixContainer {
 
-    constructor(public content: Content) {
+    constructor(public content: HTMLElement) {
     }
 
     onScroll(): Observable<any> {
-        return Observable.merge(this.content.ionScrollStart, this.content.ionScroll, this.content.ionScrollEnd);
+        // TODO: get HTMLElement scroll event
+        return merge(this.content.ionScrollStart, this.content.ionScroll, this.content.ionScrollEnd);
     }
 
     getClientTop(): number {
-        return this.content.getScrollElement().getBoundingClientRect().top;
+        // Get client view port top
+        return this.content.getBoundingClientRect().top;
     }
 
     getScrollTop(): number {
-        return this.content.getScrollElement().scrollTop;
+        // get element top
+        return this.content.scrollTop;
     }
 
     appendFixedHeader(headerElement: any): void {
-        this.content.getNativeElement().appendChild(headerElement);
+        this.content.appendChild(headerElement);
     }
 
     isScrollingDown(): boolean {
+        // TODO: Understand what is happening here
+        // TODO: Migrate to HTML Element
         return this.content.directionY === 'down';
     }
 }
