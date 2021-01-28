@@ -1,5 +1,6 @@
 import { IonAffixContainer } from '../ion-affix-container';
-import { Observable, of } from 'rxjs';
+import { fromEvent, Observable, of } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 /**
  * Adapter for ion-content.
@@ -14,8 +15,8 @@ export class ContentAdapter implements IonAffixContainer {
     constructor(public content: HTMLElement) {
         // https://stackoverflow.com/a/31223774 for help
         content.addEventListener("scroll", () => {
-            var st = window.pageYOffset || document.documentElement.scrollTop; // Credits: "https://github.com/qeremy/so/blob/master/so.dom.js#L426"
-            if (st > this.lastScrollTop){
+            const st = window.pageYOffset || document.documentElement.scrollTop; // Credits: "https://github.com/qeremy/so/blob/master/so.dom.js#L426"
+            if (st > this.lastScrollTop) {
                 // downscroll code
                 this.directionY = "down";
             } else {
@@ -27,10 +28,9 @@ export class ContentAdapter implements IonAffixContainer {
     }
 
     onScroll(): Observable<any> {
-        // TODO: get HTMLElement scroll event
-        // rather than all three
         // a bit dumber but gives same goal
-        return of(this.content.onscroll);
+        const source = fromEvent(this.content, 'scroll');
+        return source.pipe(map(e => "Scrolled!"));
     }
 
     getClientTop(): number {
@@ -48,9 +48,7 @@ export class ContentAdapter implements IonAffixContainer {
     }
 
     isScrollingDown(): boolean {
-        // TODO: Understand what is happening here
-        // TODO: Migrate to HTML Element
-        // find a way of finding if we are scrolling down???
+        // achieved with the event listener in the constructor
         return this.directionY === 'down';
     }
 }

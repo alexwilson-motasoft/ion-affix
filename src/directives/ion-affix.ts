@@ -3,26 +3,14 @@ import { IonAffixEvent } from './ion-affix-event';
 import { IonAffixContainer } from './ion-affix-container';
 import { adapterFactory } from './adapters/adapter-factory';
 
-/**
- * Directive for creating affixed list headers. Apply it to ion-list-header and pass a reference to ion-content to it.
- *
- * @example
- * <ion-content #content>
- *     <ion-list>
- *         <ion-list-header ion-affix [content]="content">Group 1</ion-list-header>
- *         <ion-item *ngFor="let item of items">{{item}}</ion-item>
- *     </ion-list>
- * </ion-content>
- *
- * @author Jonas Zuberbuehler <jonas.zuberbuehler@gmail.com>
- *
- */
 @Directive({
     selector: '[ion-affix]'
 })
 export class IonAffix implements AfterViewInit, OnDestroy {
 
     @Input('content') content;
+    @Input('affixedClass') affixedClass: string;
+
     @Output() onSticky = new EventEmitter<IonAffixEvent>();
     clone;
     scrollSubscription;
@@ -112,6 +100,10 @@ export class IonAffix implements AfterViewInit, OnDestroy {
         this.renderer.setStyle(this.headerElement, 'position', 'absolute');
         this.renderer.setStyle(this.headerElement, 'width', 'auto');
         this.renderer.setStyle(this.headerElement, 'top', '0px');
+
+        if (this.affixedClass) {
+            this.renderer.addClass(this.headerElement, this.affixedClass);
+        }
     }
 
     private clearStyles() {
@@ -124,6 +116,10 @@ export class IonAffix implements AfterViewInit, OnDestroy {
         this.renderer.removeStyle(this.headerElement, 'left');
         this.renderer.removeStyle(this.headerElement, 'right');
         this.renderer.removeStyle(this.headerElement, 'width');
+
+        if (this.affixedClass) {
+            this.renderer.removeClass(this.headerElement, this.affixedClass);
+        }
     }
 
     ngOnDestroy(): void {
