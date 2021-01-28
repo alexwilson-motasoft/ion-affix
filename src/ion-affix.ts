@@ -10,6 +10,7 @@ export class IonAffix implements AfterViewInit, OnDestroy {
 
     @Input('content') content;
     @Input('affixedClass') affixedClass: string;
+    @Input('containerTopUserOffset') containerTopUserOffset: number;
 
     @Output() onSticky = new EventEmitter<IonAffixEvent>();
     clone;
@@ -39,7 +40,8 @@ export class IonAffix implements AfterViewInit, OnDestroy {
         this.updateSticky(this.scrollContainer.getScrollTop(), containerTop, containerBottom, scrollClientTop, headerHeight, left, right, true);
 
         const onScroll = () => {
-            const scrollTop = this.scrollContainer.getScrollTop();
+            const scrollTop = this.containerTopUserOffset > 0 && this.scrollContainer.getScrollTop() > 0 
+                ? this.scrollContainer.getScrollTop() + this.containerTopUserOffset : this.scrollContainer.getScrollTop();
             scrollClientTop = this.scrollContainer.getClientTop();
             containerTop = this.containerElement.offsetTop;
             containerBottom = containerTop + this.containerElement.getBoundingClientRect().height;

@@ -48,7 +48,6 @@ export class ContentAdapter implements IonAffixContainer {
     }
 
     isScrollingDown(): boolean {
-        // achieved with the event listener in the constructor
         return this.directionY === 'down';
     }
 }
